@@ -1,14 +1,8 @@
-EBICS Java Client
+EBICS Java Client - adapted for usage with Hypi Lenzburg, Switzerland
 =====
 
-Fork of the Java open source ebics client project - https://sourceforge.net/p/ebics/
+How to get started - version for Hypi Lenzburg: 
 
-How to get started:
+https://github.com/wasabrot/ebics-java-client/wiki/Client-Howto
 
-https://github.com/uwemaurer/ebics-java-client/wiki/EBICS-Client-HowTo
-
-Main differences with this fork:
-
-- Support for French, German and Swiss banks
-- Command line client to do the setup, initialization and to download files from the bank
-- Use of maven for compilation instead of ant + Makefile + .sh scripts
+Also check out source of this fork for further infos. 
