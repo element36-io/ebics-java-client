@@ -79,7 +79,7 @@ public class KeyUtil {
       throw new RuntimeException(e);
     }
   }
-
+  
   /**
    * Returns the digest value of a given public key.
    *
@@ -96,30 +96,41 @@ public class KeyUtil {
    * @return the digest value
    * @throws EbicsException
    */
+  
   public static byte[] getKeyDigest(RSAPublicKey publicKey) throws EbicsException {
-    String			modulus;
-    String			exponent;
-    String			hash;
-    byte[]			digest;
+	  String modulus;
+	  String exponent;
+	  String hash;
+	  byte[] digest;
 
-    exponent = Hex.encodeHexString(publicKey.getPublicExponent().toByteArray());
-    modulus =  Hex.encodeHexString(removeFirstByte(publicKey.getModulus().toByteArray()));
-    hash = exponent + " " + modulus;
+	    exponent = Hex.encodeHexString(publicKey.getPublicExponent().toByteArray());
+	    // modulus = Hex.encodeHexString(removeFirstByte(publicKey.getModulus().toByteArray()));
+	    modulus = Hex.encodeHexString(publicKey.getModulus().toByteArray());
+	    if (exponent.charAt(0) == '0') {
+	       exponent = exponent.substring(1);
+	    }
 
-    if (hash.charAt(0) == '0') {
-      hash = hash.substring(1);
-    }
+	    if (modulus.charAt(0) == '0') {
+	       modulus = modulus.substring(1);
+	    }
+	    hash = exponent + " " + modulus;
 
-    try {
-      digest = MessageDigest.getInstance("SHA-256", "BC").digest(hash.getBytes("US-ASCII"));
-    } catch (GeneralSecurityException e) {
-      throw new EbicsException(e.getMessage());
-    } catch (UnsupportedEncodingException e) {
-      throw new EbicsException(e.getMessage());
-    }
+	    if (hash.charAt(0) == '0') {
+	       hash = hash.substring(1);
+	    }
 
-    return new String(Hex.encodeHex(digest, false)).getBytes();
+	    try {
+	       digest = MessageDigest.getInstance("SHA-256", "BC").digest(hash.getBytes("US-ASCII"));
+	    } catch (GeneralSecurityException e) {
+	       throw new EbicsException(e.getMessage());
+	    } catch (UnsupportedEncodingException e) {
+	       throw new EbicsException(e.getMessage());
+	    }
+
+	    String hexCode=new String(Hex.encodeHex(digest, false));
+	    return hexCode.getBytes();
   }
+
 
   /**
    * Remove the first byte of an byte array

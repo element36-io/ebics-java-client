@@ -408,6 +408,11 @@ public class EbicsClient {
         OrderAttributeType.Enum orderAttribute = OrderAttributeType.OZHNN;
 
         FileTransfer transferManager = new FileTransfer(session);
+        
+        //  swiss pain.001 file with XE2 command
+        if (orderType==OrderType.XE2) {
+        	session.addSessionParam("FORMAT", "pain.001.001.03.ch.02");
+        }
 
         configuration.getTraceManager().setTraceDirectory(
             configuration.getTransferTraceDirectory(user));
@@ -633,7 +638,11 @@ public class EbicsClient {
         addOption(options, OrderType.XCT, "Send XCT file (any format)");
         addOption(options, OrderType.XE2, "Send XE2 file (any format)");
         addOption(options, OrderType.CCT, "Send CCT file (any format)");
-
+        
+        addOption(options, OrderType.Z53, "Fetch Z53 file (Swiss Kontoauszug)");
+        addOption(options, OrderType.Z54, "Fetch Z54 file (Swiss Sammler)");
+        
+        
         options.addOption(null, "skip_order", true, "Skip a number of order ids");
 
         options.addOption("o", "output", true, "output file");
@@ -671,7 +680,7 @@ public class EbicsClient {
         String inputFileValue = cmd.getOptionValue("i");
 
         List<OrderType> fetchFileOrders = Arrays.asList(OrderType.STA, OrderType.VMK,
-            OrderType.ZDF, OrderType.ZB6, OrderType.PTK, OrderType.HAC, OrderType.Z01);
+            OrderType.ZDF, OrderType.ZB6, OrderType.PTK, OrderType.HAC, OrderType.Z01, OrderType.Z53, OrderType.Z54);
 
         for (OrderType type : fetchFileOrders) {
             if (hasOption(cmd, type)) {

@@ -19,10 +19,13 @@
 
 package org.kopi.ebics.xml;
 
+import org.apache.log4j.Logger;
+import org.kopi.ebics.certificate.KeyStoreManager;
 import org.kopi.ebics.exception.EbicsException;
 import org.kopi.ebics.exception.NoDownloadDataAvailableException;
 import org.kopi.ebics.exception.ReturnCode;
 import org.kopi.ebics.interfaces.ContentFactory;
+import org.kopi.ebics.session.DefaultEbicsLogger;
 import org.kopi.ebics.session.OrderType;
 
 /**
@@ -60,8 +63,14 @@ public class DownloadInitializationResponseElement extends InitializationRespons
   public void build() throws EbicsException {
     super.build();
     numSegments = (int)response.getHeader().getStatic().getNumSegments();
-    segmentNumber = (int)response.getHeader().getMutable().getSegmentNumber().getLongValue();
-    lastSegment = response.getHeader().getMutable().getSegmentNumber().getLastSegment();
+    Logger.getLogger(DownloadInitializationResponseElement.class.getName()).info(" no of segments:"+numSegments);
+    segmentNumber=0;
+    lastSegment=true;
+    if (response.getHeader().getMutable().getSegmentNumber()!=null) {
+    	   segmentNumber = (int)response.getHeader().getMutable().getSegmentNumber().getLongValue();
+    	   lastSegment = response.getHeader().getMutable().getSegmentNumber().getLastSegment();
+    }
+   
     transactionKey = response.getBody().getDataTransfer().getDataEncryptionInfo().getTransactionKey();
     orderData = response.getBody().getDataTransfer().getOrderData().getByteArrayValue();
   }

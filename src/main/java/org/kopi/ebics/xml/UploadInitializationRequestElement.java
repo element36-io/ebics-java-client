@@ -119,8 +119,10 @@ public class UploadInitializationRequestElement extends InitializationRequestEle
 	                                          decodeHex(session.getUser().getPartner().getBank().getE002Digest()));
     bankPubKeyDigests = EbicsXmlFactory.createBankPubKeyDigests(authentication, encryption);
     orderType = EbicsXmlFactory.createOrderType(type.toString());
-    fileFormat = EbicsXmlFactory.createFileFormatType(session.getConfiguration().getLocale().getCountry().toUpperCase(),
-	                                              session.getSessionParam("FORMAT"));
+    String format=session.getSessionParam("FORMAT");
+
+    session.getConfiguration().getLogger().info(" file format - null may cause error. File format is: "+format);
+    fileFormat = EbicsXmlFactory.createFileFormatType(session.getConfiguration().getLocale().getCountry().toUpperCase(),format);	                                             
 
     String nextOrderId = session.getUser().getPartner().nextOrderId();
 

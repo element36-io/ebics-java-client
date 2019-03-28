@@ -19,6 +19,7 @@
 
 package org.kopi.ebics.xml;
 
+import org.apache.log4j.Logger;
 import org.kopi.ebics.exception.EbicsException;
 import org.kopi.ebics.exception.ReturnCode;
 import org.kopi.ebics.interfaces.ContentFactory;
@@ -63,6 +64,7 @@ public class InitializationResponseElement extends DefaultResponseElement {
 
   protected void processBodyReturnCode() throws EbicsException {
       String bodyRetCode = response.getBody().getReturnCode().getStringValue();
+      Logger.getRootLogger().info("ebics returncode:"+bodyRetCode);
       ReturnCode returnCode = ReturnCode.toReturnCode(bodyRetCode, "");
       checkReturnCode(returnCode);
   }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+
+Example for a Swiss Payment Instruction - tested with Hypi Lenzburg AG
+
+(C) Copyright 2010, SKSF, www.sksf.ch
+
+Anregungen und Fragen zu diesem Dokument können an das jeweilige Finanzinstitut gerichtet werden. 
+Allgemeine Anregungen können auch bei der SIX Interbank Clearing AG unter folgender Adresse angebracht werden: 
+pm@six-group.com
+
+usage
+-->
+<Document xmlns="http://www.six-interbank-clearing.com/de/pain.001.001.03.ch.02.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.six-interbank-clearing.com/de/pain.001.001.03.ch.02.xsd  pain.001.001.03.ch.02.xsd">
+	<CstmrCdtTrfInitn>
+		<GrpHdr>
+			<MsgId>MSG-03</MsgId>
+			<CreDtTm>2019-03-25T15:00:00</CreDtTm>
+			<NbOfTxs>1</NbOfTxs>
+			<CtrlSum>3.60</CtrlSum>
+			<InitgPty>
+				<Nm>Element36 AG</Nm>
+			</InitgPty>
+		</GrpHdr>
+		<PmtInf>
+			<PmtInfId>PMTINF-03</PmtInfId>
+			<PmtMtd>TRF</PmtMtd>
+			<BtchBookg>true</BtchBookg>
+			<ReqdExctnDt>2019-03-26</ReqdExctnDt>
+			<Dbtr>
+				<Nm>Element36 AG</Nm>
+				<PstlAdr>
+					<Ctry>CH</Ctry>
+					<AdrLine>Bahnmatt 25, 6340 Baar</AdrLine>
+				</PstlAdr>
+			</Dbtr>
+			<DbtrAcct>
+				<Id>
+					<IBAN>CH43???12</IBAN>
+				</Id>
+			</DbtrAcct>
+			<DbtrAgt>
+				<FinInstnId>
+					<BIC>HYPLCH2257B</BIC>
+				</FinInstnId>
+			</DbtrAgt>
+			<CdtTrfTxInf>
+				<PmtId>
+					<InstrId>INSTRID-02-03</InstrId>
+					<EndToEndId>ENDTOENDID-003</EndToEndId>
+				</PmtId>
+				<PmtTpInf>
+					<LclInstrm>
+						<Prtry>CH03</Prtry>
+					</LclInstrm>
+				</PmtTpInf>
+				<Amt>
+					<InstdAmt Ccy="CHF">3.60</InstdAmt>
+				</Amt>
+				<CdtrAgt>
+					<FinInstnId>
+						<ClrSysMmbId>
+							<ClrSysId>
+								<Cd>CHBCC</Cd>
+							</ClrSysId>
+							<MmbId>8307</MmbId>
+						</ClrSysMmbId>
+					</FinInstnId>				
+				</CdtrAgt>		
+				<Cdtr>
+					<Nm>element36 AG</Nm>
+					<PstlAdr>
+						<StrtNm>Companyname?</StrtNm>
+						<BldgNb>25</BldgNb>
+						<PstCd>0000</PstCd>
+						<TwnNm>City?</TwnNm>
+						<Ctry>CH</Ctry>
+					</PstlAdr>
+				</Cdtr>
+
+				<CdtrAcct>
+					<Id>
+						<IBAN>CH21???20</IBAN>
+					</Id>
+				</CdtrAcct>
+
+				<RmtInf>
+					<Ustrd>Some Test Text</Ustrd>
+				</RmtInf>
+			</CdtTrfTxInf>
+		</PmtInf>
+	</CstmrCdtTrfInitn>
+</Document>
