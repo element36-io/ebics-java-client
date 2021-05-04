@@ -27,6 +27,7 @@ import org.kopi.ebics.exception.ReturnCode;
 import org.kopi.ebics.interfaces.ContentFactory;
 import org.kopi.ebics.session.DefaultEbicsLogger;
 import org.kopi.ebics.session.OrderType;
+import org.kopi.ebics.interfaces.EbicsOrderType;
 
 /**
  * The <code>DInitializationResponseElement</code> is the response element
@@ -44,19 +45,20 @@ public class DownloadInitializationResponseElement extends InitializationRespons
    * @param name the element name
    */
   public DownloadInitializationResponseElement(ContentFactory factory,
-                                        OrderType orderType,
+                                        EbicsOrderType orderType,
                                         String name)
   {
     super(factory, orderType, name);
   }
 
   @Override
-  protected void processBodyReturnCode() throws NoDownloadDataAvailableException {
+  protected void processBodyReturnCode() throws EbicsException {
       String bodyRetCode = response.getBody().getReturnCode().getStringValue();
       returnCode = ReturnCode.toReturnCode(bodyRetCode, "");
       if (returnCode.equals(ReturnCode.EBICS_NO_DOWNLOAD_DATA_AVAILABLE)) {
         throw new NoDownloadDataAvailableException();
       }
+      checkReturnCode(returnCode);
   }
 
   @Override
