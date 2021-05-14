@@ -445,7 +445,7 @@ public class User implements EbicsUser, Savable {
    * <p>For the identification and authentication process, EBICS defines the process “X002” with
    * the following parameters:
    * <ol>
-   *   <li>Key length in Kbit >=1Kbit (1024 bit) and lesser than 16Kbit</li>
+   *   <li>Key length in Kbit &gt;=1Kbit (1024 bit) and lesser than 16Kbit</li>
    *   <li>Hash algorithm SHA-256</li>
    *   <li>Padding process: PKCS#1</li>
    *   <li>Canonisation process: http://www.w3.org/TR/2001/REC-xml-c14n-20010315
@@ -458,7 +458,7 @@ public class User implements EbicsUser, Savable {
    * <ol>
    *   <li> The key length is defined else where.
    *   <li> The padding is performed by the {@link Signature} class.
-   *   <li> The digest is already canonized in the {@link SignedInfo#sign(byte[]) sign(byte[])}
+   *   <li> The digest is already canonized in the {@link org.kopi.ebics.xml.SignedInfo#sign(byte[]) sign(byte[])}
    * </ol>
    */
   @Override

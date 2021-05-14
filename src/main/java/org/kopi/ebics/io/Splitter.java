@@ -68,7 +68,7 @@ public class Splitter {
    *             separated sequentially and in a base64-conformant manner into segments
    *             that each have a maximum of 1,048,576 bytes.
    *     </ol>
-   * 
+   *  </ol>
    * @param isCompressionEnabled enable compression?
    * @param keySpec the secret key spec
    * @throws EbicsException

@@ -1,12 +1,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.kopi</groupId>
-    <artifactId>ebics</artifactId>
+    <groupId>io.github.element36-io</groupId>
+    <artifactId>ebics-cli</artifactId>
     <packaging>jar</packaging>
     <version>1.1</version>
     <name>ebics</name>
     <url>https://github.com/element36-io/ebics-java-client</url>
+
+    <description>
+        This library allows to interact with banks using the EBICS (Electronic Banking Internet Communication Standard). 
+        You can use the EbicsClient as command line tool or use it from your Java application.
+        The library was forked from: https://github.com/uwemaurer/ebics-java-client
+        to add new Ebics commands and to add Docker and Maven support. 
+    </description>
+     <licenses>
+        <license>
+            <name>GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999</name>
+            <url>https://raw.githubusercontent.com/element36-io/ebics-java-client/b7dc8e3f551636a69be8b9264280c671b14e85e4/LICENSE.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git://github.com/element36-io/ebics-java-client.git</connection>
+        <developerConnection>scm:git:git://github.com/element36-io/ebics-java-client.git</developerConnection>
+        <url>https://github.com/element36-io/ebics-java-client</url>
+        <tag>HEAD</tag>
+    </scm>
+   <developers>
+        <developer>
+            <id>wstrametz</id>
+            <name>Walter Strametz</name>
+            <email>walter.strametz@element36.io</email>
+            <organization>element36</organization>
+            <organizationUrl>http://element36.io/</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+2</timezone>
+        </developer>
+    </developers>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.xmlbeans</groupId>
@@ -139,15 +174,82 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.1</version>
             </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                    <id>sign-artifacts</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>sign</goal>
+                    </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                    <id>attach-sources</id>
+                    <goals>
+                        <goal>jar-no-fork</goal>
+                    </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                    <id>attach-javadocs</id>
+                    <goals>
+                        <goal>jar</goal>
+                    </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-         
     <distributionManagement>
+        <!--
         <repository>
             <id>github</id>
             <name>GitHub OWNER Apache Maven Packages</name>
             <url>https://maven.pkg.github.com/element36-io/ebics-java-client</url>
         </repository>
+        -->
+          <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>            
          
     <properties>
