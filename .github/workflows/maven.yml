@@ -25,7 +25,6 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven according to distributionManagement in pom.xml
-      run: mvn deploy
+      run: mvn deploy -DrepositoryId=github 
       env:
-        repositoryId: github
         GITHUB_TOKEN: ${{ github.token }} 
