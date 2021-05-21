@@ -10,9 +10,6 @@ cd ebics-java-client
 docker run -it -v $PWD:/app -w /app  maven:3-jdk-8 mvn install exec:java  -Dexec.mainClass=org.kopi.ebics.client.EbicsClient -Dexec.args="--help" 
 ```
 
-
-You can build it directly from the source with maven or use the releases from [JitPack](https://jitpack.io/#uwemaurer/ebics-java-client/).
-
 Gradle:
 ```
 dependencies {
@@ -23,7 +20,6 @@ dependencies {
 Maven
 
 ```
-
 <dependency>
     <groupId>io.github.element36-io</groupId>
     <artifactId>ebics-cli</artifactId>
