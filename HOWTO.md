@@ -11,6 +11,8 @@
 
       mvn exec:java  -Dexec.mainClass=org.kopi.ebics.client.EbicsClient -Dexec.args="--help"
 
+
+
 ## Usage
 
 Once you configured `ebics.txt` you can create the user and send the `INI` and `HIA` request.
@@ -37,6 +39,18 @@ Then you need to compare the if the bank encryption keys from the `HPB` request 
 Now the client is ready to use, you can fetch the account data with a `STA` request
 
     mvn exec:java  -Dexec.mainClass=org.kopi.ebics.client.EbicsClient -Dexec.args="--sta -o sta.txt"
+
+
+## Usage with docker image
+
+Instead of compiling and maven you may use the docker image directly: 
+
+        docker run e36io/ebics-cli --help
+
+The Ebics client needs a working persisent directory with ebics.txt which also contains the output files - mount an external directory into the docker image: 
+
+        docker run -v $HOME/ebics:/root/ebics e36io/ebics-cli --help
+
 
 ## SOCKS
 
