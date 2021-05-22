@@ -10,5 +10,5 @@ RUN mkdir /app
 COPY --from=build /app/target/ebics*.jar /app/
 COPY --from=build /app/target/lib/ /app/lib
 WORKDIR /app
-ENTRYPOINT ["java","-cp","/app/*:/app/lib/*", "org.kopi.ebics.client.EbicsClient"]
+ENTRYPOINT ["java","-jar","ebics-cli-1.1.jar"]
 CMD ["--help"]
