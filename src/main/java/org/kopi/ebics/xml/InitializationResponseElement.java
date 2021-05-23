@@ -19,7 +19,7 @@
 
 package org.kopi.ebics.xml;
 
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 import org.kopi.ebics.exception.EbicsException;
 import org.kopi.ebics.exception.ReturnCode;
 import org.kopi.ebics.interfaces.ContentFactory;
@@ -50,6 +50,8 @@ public class InitializationResponseElement extends DefaultResponseElement {
     this.orderType = orderType;
   }
 
+  private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
   @Override
   public void build() throws EbicsException {
     parse(factory);
@@ -64,7 +66,8 @@ public class InitializationResponseElement extends DefaultResponseElement {
 
   protected void processBodyReturnCode() throws EbicsException {
       String bodyRetCode = response.getBody().getReturnCode().getStringValue();
-      Logger.getRootLogger().info("ebics returncode:"+bodyRetCode);
+      
+      LOGGER.info("ebics returncode:"+bodyRetCode);
       ReturnCode returnCode = ReturnCode.toReturnCode(bodyRetCode, "");
       checkReturnCode(returnCode);
   }

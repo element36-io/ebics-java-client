@@ -19,7 +19,7 @@
 
 package org.kopi.ebics.xml;
 
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
 import org.kopi.ebics.certificate.KeyStoreManager;
 import org.kopi.ebics.exception.EbicsException;
 import org.kopi.ebics.exception.NoDownloadDataAvailableException;
