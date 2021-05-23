@@ -4,7 +4,7 @@
     <groupId>io.github.element36-io</groupId>
     <artifactId>ebics-cli</artifactId>
     <packaging>jar</packaging>
-    <version>1.1</version>
+    <version>1.2</version>
     <name>ebics-java-client</name>
     <url>https://github.com/element36-io/ebics-java-client</url>
 
