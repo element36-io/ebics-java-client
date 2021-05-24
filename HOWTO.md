@@ -1,11 +1,11 @@
 ## Setup
 - First step is to contact your bank to request EBICS access and sign the needed documents.
 - They might ask for an IP address and only allow requests from this address.
-- Find your banks EBICS parameters, eg [EBICS parameters UBS] (http://media.topal.ch/Public/Downloads/ISO20022/EBICS/Financial_Institut/UBS/ubs_keyport_connection_parameters.pdf) or  [EBICS parameters for Zürcher Kantonalbank ](https://www.zkb.ch/media/dok/efinance/ebics-verbindungsparameter.pdf) (in German) 
+- Find your banks EBICS parameters, eg [EBICS parameters UBS] (http://media.topal.ch/Public/Downloads/ISO20022/EBICS/Financial_Institut/UBS/ubs_keyport_connection_parameters.pdf) or  [EBICS parameters for Zürcher Kantonalbank ](https://www.zkb.ch/media/dok/efinance/ebics-verbindungsparameter.pdf) (in German). Please check your own banks instructions. 
 - In addition your bank will provide you with more parameters such as user id.
-- Put those parameters in the `ebics.txt` properties file in the $HOME/ebics directory - check ebics-template.txt.
+- Put those parameters in the `ebics.txt` properties file in the `$HOME/ebics/client` directory - check `ebics-template.txt`.
 
-## Compile the project
+## Compile the project (minimum java 1.88)
 
       mvn install
 
@@ -59,6 +59,4 @@ If your bank allows requests only from a specific IP address (eg your server mac
     ssh -D localhost:55555  user@yourserver
 
     mvn exec:java  -DsocksProxyHost=localhost -DsocksProxyPort=55555   .... 
-
-
 
