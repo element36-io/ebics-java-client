@@ -74,9 +74,4 @@ public interface EbicsLogger {
    */
   public void report(ReturnCode returnCode);
 
-  /**
-   * Sets the logger log file
-   * @param logFile the log file
-   */
-  public void setLogFile(String logFile);
 }

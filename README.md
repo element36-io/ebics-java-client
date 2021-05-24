@@ -2,46 +2,49 @@ EBICS Java Client
 
 This library allows to interact with banks using the EBICS (Electronic Banking Internet Communication Standard)
 
-You can use the `EbicsClient` as command line tool or use it from your Java application.
+You can use the `EbicsClient` as command line tool, using docker or use it from your Java application.
 
-https://github.com/uwemaurer/ebics-java-client/wiki/EBICS-Client-HowTo
-
-You can build it directly from the source with maven or use the releases from [JitPack](https://jitpack.io/#uwemaurer/ebics-java-client/).
+```
+git clone git@github.com:element36-io/ebics-java-client.git
+cd ebics-java-client
+docker run -it -v $PWD:/app -w /app  maven:3-jdk-8 mvn install exec:java  -Dexec.mainClass=org.kopi.ebics.client.EbicsClient -Dexec.args="--help" 
+```
 
 Gradle:
 ```
-allprojects {
-  repositories {
-    ...
-    maven { url 'https://jitpack.io' }
-  }
-}
-
 dependencies {
-    implementation 'com.github.uwemaurer:ebics-java-client:97867ac56e'
+    implementation 'io.github.element36-io:ebics-cli:1.1''
 }
 ```
-Maven
-```
-<repositories>
-	<repository>
-	    <id>jitpack.io</id>
-	    <url>https://jitpack.io</url>
-	</repository>
-</repositories>
 
+Maven
+
+```
 <dependency>
-    <groupId>com.github.uwemaurer</groupId>
-    <artifactId>ebics-java-client</artifactId>
-    <version>97867ac56e</version>
+    <groupId>io.github.element36-io</groupId>
+    <artifactId>ebics-cli</artifactId>
+    <version>1.1</version>
 </dependency>
 ```
- 
 
-This project is based on https://sourceforge.net/p/ebics/
+Run tests for the ebics-java-client: 
 
-Main differences with this fork:
+```
+git clone git@github.com:element36-io/ebics-java-client.git
+cd ebics-java-client
+docker run -it -v $PWD:/app -w /app  maven:3-jdk-8 mvn test surefire-report:report
 
-- Support for French, German and Swiss banks
-- Command line client to do the setup, initialization and to download files from the bank
-- Use of maven for compilation instead of ant + Makefile + .sh scripts
+```
+
+See ./target for test results. `surefire-report:report` is optional but it creates test report here: ./target/site/surefire-report.html  
+
+
+The project is forked form https://github.com/uwemaurer/ebics-java-client/
+which was based on https://sourceforge.net/p/ebics/
+
+Main differences with this fork from ebics-java-client:
+
+- Support for new commands used in Switzerland.
+- Jar file in maven central repository.
+- Docker image is automatically built from master branch on Dockerhub. 
+- Changed documentation for usage with docker

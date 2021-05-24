@@ -94,9 +94,7 @@ public class DefaultConfiguration implements Configuration {
     //Create users directory
     IOUtils.createDirectories(getUsersDirectory());
 
-    logger.setLogFile(getLogDirectory() + File.separator + getLogFileName());
-    ((DefaultEbicsLogger)logger).setFileLoggingEnabled(true);
-    ((DefaultEbicsLogger)logger).setLevel(DefaultEbicsLogger.ALL_LEVEL);
+    //logger.setLogFile(getLogDirectory() + File.separator + getLogFileName());
     serializationManager.setSerializationDirectory(getSerializationDirectory());
     traceManager.setTraceEnabled(isTraceEnabled());
     letterManager = new DefaultLetterManager(getLocale());

@@ -177,7 +177,7 @@ public class X509Generator {
     vector = new ASN1EncodableVector();
     vector.add(KeyPurposeId.id_kp_emailProtection);
 
-    generator.addExtension(X509Extensions.ExtendedKeyUsage, false, new ExtendedKeyUsage(new DERSequence(vector)));
+    generator.addExtension(X509Extensions.ExtendedKeyUsage, false,  ExtendedKeyUsage.getInstance(new DERSequence(vector)));
 
     switch (keyusage) {
     case X509Constants.SIGNATURE_KEY_USAGE:
@@ -224,7 +224,7 @@ public class X509Generator {
     vector = new ASN1EncodableVector();
     vector.add(new GeneralName(new X509Name(issuer)));
 
-    return new AuthorityKeyIdentifier(keyInfo, new GeneralNames(new DERSequence(vector)), serial);
+    return new AuthorityKeyIdentifier(keyInfo,  GeneralNames.getInstance(new DERSequence(vector)), serial);
   }
 
   /**
@@ -243,7 +243,7 @@ public class X509Generator {
     input = new ByteArrayInputStream(publicKey.getEncoded());
     keyInfo = new SubjectPublicKeyInfo((ASN1Sequence)new ASN1InputStream(input).readObject());
 
-    return new SubjectKeyIdentifier(keyInfo);
+    return  SubjectKeyIdentifier.getInstance(keyInfo);
   }
 
   /**
