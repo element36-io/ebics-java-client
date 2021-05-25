@@ -1,4 +1,5 @@
 # docker build . -t client
+# docker  run -it --entrypoint sh client 
 # docker run  -v $HOME/ebics:/root/ebics client --sta -o sta.txt
 # sudo  docker build . -t client;sudo docker run  -v $HOME/ebics:/root/ebics client --sta -o sta.txt
 FROM maven:3-jdk-8 as build
@@ -15,5 +16,7 @@ RUN mkdir /app
 COPY --from=build /app/target/ebics*.jar /app/
 COPY --from=build /app/target/lib/ /app/lib
 WORKDIR /app
-ENTRYPOINT ["java","-jar","ebics-cli-1.3.jar"]
+#remove version form jar files in container and note the used version
+RUN FN=`(ls ebics-*[0-9].jar | head -1)`;  echo $FN;  mv $FN ebics-cli.jar;  touch $FN.version
+ENTRYPOINT ["java","-jar","ebics-cli.jar"]
 CMD ["--help"]
