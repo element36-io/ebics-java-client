@@ -5,7 +5,7 @@ This library allows to interact with banks using the EBICS (Electronic Banking I
 You can use the `EbicsClient` as command line tool, using docker or use it from your Java application.
 
 ```
-git clone git@github.com:element36-io/ebics-java-client.git
+git clone https://github.com/element36-io/ebics-java-client.git
 cd ebics-java-client
 docker run -it -v $PWD:/app -w /app  maven:3-jdk-8 mvn install exec:java  -Dexec.mainClass=org.kopi.ebics.client.EbicsClient -Dexec.args="--help" 
 ```
@@ -17,7 +17,7 @@ dependencies {
 }
 ```
 
-Maven
+Maven: 
 
 ```
 <dependency>
@@ -30,7 +30,7 @@ Maven
 Run tests for the ebics-java-client: 
 
 ```
-git clone git@github.com:element36-io/ebics-java-client.git
+git clone https://github.com/element36-io/ebics-java-client.git
 cd ebics-java-client
 docker run -it -v $PWD:/app -w /app  maven:3-jdk-8 mvn test surefire-report:report
 
