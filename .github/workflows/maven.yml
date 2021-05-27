@@ -32,6 +32,7 @@ jobs:
       run: mvn -B compile package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven according to distributionManagement in pom.xml
+      if: github.ref == 'refs/heads/master
       run: echo "............." ${{ secrets.MVN_USERNAME }}; mvn deploy
       env:
           MAVEN_USERNAME: ${{ secrets.MVN_USERNAME }}
