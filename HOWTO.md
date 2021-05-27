@@ -1,14 +1,13 @@
 ## Setup
 - First step is to contact your bank to request EBICS access and sign the needed documents.
 - They might ask for an IP address and only allow requests from this address.
-- Find your banks EBICS parameters, eg [EBICS parameters UBS] (http://media.topal.ch/Public/Downloads/ISO20022/EBICS/Financial_Institut/UBS/ubs_keyport_connection_parameters.pdf) or  [EBICS parameters for Zürcher Kantonalbank ](https://www.zkb.ch/media/dok/efinance/ebics-verbindungsparameter.pdf) (in German) 
+- Find your banks EBICS parameters, eg [EBICS parameters UBS] (http://media.topal.ch/Public/Downloads/ISO20022/EBICS/Financial_Institut/UBS/ubs_keyport_connection_parameters.pdf) or  [EBICS parameters for Zürcher Kantonalbank ](https://www.zkb.ch/media/dok/efinance/ebics-verbindungsparameter.pdf) (in German). Please check your own banks instructions. 
 - In addition your bank will provide you with more parameters such as user id.
-- Put those parameters in the `ebics.txt` properties file in the $HOME/ebics directory - check ebics-template.txt.
+- Put those parameters in the `ebics.txt` properties file in the `$HOME/ebics/client` directory - check `ebics-template.txt`.
 
-## Compile the project
+## Compile the project (minimum java 1.88)
 
       mvn install
-
       mvn exec:java  -Dexec.mainClass=org.kopi.ebics.client.EbicsClient -Dexec.args="--help"
 
 
@@ -52,6 +51,21 @@ The Ebics client needs a working persisent directory with ebics.txt which also c
         docker run -v $HOME/ebics:/root/ebics e36io/ebics-cli --help
 
 
+## Work locally with docker image
+
+Some usefully commands:
+
+    docker build . -t client
+    docker run  -v $HOME/ebics:/root/ebics client --help
+    docker run  -v $HOME/ebics:/root/ebics client --sta -o sta.txt
+    docker run  -v $HOME/ebics:/root/ebics -v $HOME/ghworkspace/ebics-java-service/out:/root/out   client  --xe2  -i /root/out/pain001-1622059635.xml -o /root/out
+    # inside the container
+    docker  run -it --entrypoint sh client 
+    java -cp "ebics-cli-*.jar:lib/*" org.kopi.ebics.client.EbicsClient --help
+    java -cp "ebics-cli-*.jar:lib/*" org.kopi.ebics.client.EbicsClient --sta -o sta.txt
+
+
+
 ## SOCKS
 
 If your bank allows requests only from a specific IP address (eg your server machine), it is convenient to use a SOCKS proxy so that you can send requests from your local machine during initialization / testing.
@@ -59,6 +73,4 @@ If your bank allows requests only from a specific IP address (eg your server mac
     ssh -D localhost:55555  user@yourserver
 
     mvn exec:java  -DsocksProxyHost=localhost -DsocksProxyPort=55555   .... 
-
-
 
