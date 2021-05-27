@@ -8,7 +8,6 @@
 ## Compile the project (minimum java 1.88)
 
       mvn install
-
       mvn exec:java  -Dexec.mainClass=org.kopi.ebics.client.EbicsClient -Dexec.args="--help"
 
 
@@ -50,6 +49,21 @@ Instead of compiling and maven you may use the docker image directly:
 The Ebics client needs a working persisent directory with ebics.txt which also contains the output files - mount an external directory into the docker image: 
 
         docker run -v $HOME/ebics:/root/ebics e36io/ebics-cli --help
+
+
+## Work locally with docker image
+
+Some usefully commands:
+
+    docker build . -t client
+    docker run  -v $HOME/ebics:/root/ebics client --help
+    docker run  -v $HOME/ebics:/root/ebics client --sta -o sta.txt
+    docker run  -v $HOME/ebics:/root/ebics -v $HOME/ghworkspace/ebics-java-service/out:/root/out   client  --xe2  -i /root/out/pain001-1622059635.xml -o /root/out
+    # inside the container
+    docker  run -it --entrypoint sh client 
+    java -cp "ebics-cli-*.jar:lib/*" org.kopi.ebics.client.EbicsClient --help
+    java -cp "ebics-cli-*.jar:lib/*" org.kopi.ebics.client.EbicsClient --sta -o sta.txt
+
 
 
 ## SOCKS
