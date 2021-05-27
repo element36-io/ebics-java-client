@@ -2,6 +2,8 @@
 # docker  run -it --entrypoint sh client 
 # docker run  -v $HOME/ebics:/root/ebics client --sta -o sta.txt
 # sudo  docker build . -t client;sudo docker run  -v $HOME/ebics:/root/ebics client --sta -o sta.txt
+# java -cp "ebics-cli-*.jar:lib/*" org.kopi.ebics.client.EbicsClient --help
+# java -cp "ebics-cli-*.jar:lib/*" org.kopi.ebics.client.EbicsClient --sta -o sta.txt
 FROM maven:3-jdk-8 as build
 #16 as build
 RUN mkdir app
