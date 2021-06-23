@@ -8,7 +8,6 @@ cd ebics-java-client
 docker run -it -v $PWD:/app -w /app  maven:3-jdk-8 mvn install exec:java  -Dexec.mainClass=org.kopi.ebics.client.EbicsClient -Dexec.args="--help" 
 ```
 
-
 ## Integrate as library
 
 Used as a gradle dependency - see `Ebics Java Service`(https://github.com/element36-io/ebics-java-service) for an example how to use the client. 
